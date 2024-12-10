@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>즉석 할 일 추천 플랫폼</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        select, input {
+            font-size: 16px;
+            margin: 10px;
+        }
+        #suggestion {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>즉석 할 일 추천 플랫폼</h1>
+    <p>현재 상태와 시간을 선택하면 추천을 받을 수 있습니다!</p>
+
+    <!-- 사용자 입력 -->
+    <label for="mood">기분:</label>
+    <select id="mood">
+        <option value="bored">지루함</option>
+        <option value="stressed">스트레스</option>
+        <option value="tired">피곤함</option>
+    </select>
+
+    <label for="time">가용 시간:</label>
+    <select id="time">
+        <option value="short">10분</option>
+        <option value="medium">1시간</option>
+        <option value="long">하루</option>
+    </select>
+
+    <button onclick="getSuggestion()">추천 받기</button>
+    <p id="suggestion">여기에 추천 결과가 표시됩니다!</p>
+
+    <script>
+        // 할 일 데이터
+        const suggestions = {
+            bored: {
+                short: ["간단한 퍼즐 풀기", "책 한 챕터 읽기"],
+                medium: ["새로운 레시피 도전", "방 청소하기"],
+                long: ["DIY 프로젝트 시작", "1일 여행 계획하기"]
+            },
+            stressed: {
+                short: ["심호흡 5분하기", "짧은 산책"],
+                medium: ["요가 30분", "명상 앱 사용"],
+                long: ["힐링 영화 감상", "스파 데이 만들기"]
+            },
+            tired: {
+                short: ["간단한 스트레칭", "편안한 음악 듣기"],
+                medium: ["책 읽으며 쉬기", "가벼운 낮잠"],
+                long: ["건강한 음식 요리", "긴 휴식 시간 가지기"]
+            }
+        };
+
+        // 추천 함수
+        function getSuggestion() {
+            const mood = document.getElementById("mood").value;
+            const time = document.getElementById("time").value;
+
+            const activities = suggestions[mood][time];
+            const randomIndex = Math.floor(Math.random() * activities.length);
+            document.getElementById("suggestion").innerText = activities[randomIndex];
+        }
+    </script>
+</body>
+</html>
